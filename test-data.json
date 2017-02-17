@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "fullName": "David Sims",
+      "age": 26,
+      "companyId": "1"
+    },
+    {
+      "id": "2",
+      "fullName": "Trinity Sims",
+      "age": 13,
+      "companyId": "2"
+    }
+  ],
+  "companies": [
+    {
+      "id": "1",
+      "name": "Apple"
+    },
+    {
+      "id": "2",
+      "name": "Microsoft"
+    }
+  ]
+}

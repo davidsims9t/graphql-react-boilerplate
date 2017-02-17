@@ -1,1 +1,3 @@
-# graphql-react-boilerplate
+# A Simple GraphQL and React Boilerplate
+
+Documentation in progress...
