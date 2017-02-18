@@ -18,7 +18,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'app/views/index.html'
+      template: 'app/views/template.ejs'
     })
   ]
 };
