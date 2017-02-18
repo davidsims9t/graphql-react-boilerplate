@@ -1,6 +1,7 @@
 const graphql = require('graphql');
 const fetch = require('node-fetch');
 const {
+  GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
@@ -78,6 +79,49 @@ const RootQuery = new GraphQLObjectType({
   }
 });
 
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addUser: {
+      type: UserType,
+      args: {
+        fullName: {
+          type: new GraphQLNonNull(GraphQLString)
+        },
+        age: {
+          type: GraphQLInt
+        },
+        companyId: {
+          type: GraphQLString
+        }
+      },
+      resolve(parentValue, { fullName, age, companyId }) {
+        return fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({fullName, age, companyId})
+        }).then(res => res.json());
+      }
+    },
+    deleteUser: {
+      type: UserType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString)
+        }
+      },
+      resolve(parentValue, { id }) {
+        return fetch(`http://localhost:3000/users/${id}`, {
+          method: 'DELETE'
+        }).then(res => res.json());
+      }
+    }
+  }
+});
+
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 });
