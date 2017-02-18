@@ -97,11 +97,37 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parentValue, { fullName, age, companyId }) {
         return fetch('http://localhost:3000/users', {
-          method: 'POST',
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({fullName, age, companyId})
+        }).then(res => res.json());
+      }
+    },
+    editUser: {
+      type: UserType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString)
+        },
+        fullName: {
+          type: GraphQLString
+        },
+        age: {
+          type: GraphQLInt
+        },
+        companyId: {
+          type: GraphQLString
+        }
+      },
+      resolve(parentValue, { id, fullName, age, companyId }) {
+        return fetch(`http://localhost:3000/users/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ fullName, age })
         }).then(res => res.json());
       }
     },

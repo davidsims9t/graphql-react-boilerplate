@@ -1,3 +1,4 @@
-# A Simple GraphQL and React Boilerplate
+# GraphQL, Apollo Client, and React Boilerplate
 
-Documentation in progress...
+Uses GraphQL and Express for the back-end, Apollo client as the client, and
+React for the front-end.
