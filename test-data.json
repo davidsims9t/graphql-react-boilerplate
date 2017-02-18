@@ -3,12 +3,14 @@
     {
       "fullName": "David Sims",
       "age": 26,
-      "id": "1"
+      "id": "1",
+      "companyId": "1"
     },
     {
       "fullName": "Joe Sims",
       "age": 32,
-      "id": "2"
+      "id": "2",
+      "companyId": "2"
     }
   ],
   "companies": [
