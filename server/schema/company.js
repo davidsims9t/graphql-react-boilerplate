@@ -1,10 +1,11 @@
 const graphql = require('graphql');
-const fetch = require('node-fetch');
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList
 } = graphql;
+
+const UserModel = require('../models/User');
 
 const CompanyType = new GraphQLObjectType({
   name: 'Company',
@@ -16,10 +17,9 @@ const CompanyType = new GraphQLObjectType({
       type: GraphQLString
     },
     users: {
-      type: new GraphQLList(require('./user')),
+      type: new GraphQLList(require('./User')),
       resolve(parentValue, args) {
-        return fetch(`http://localhost:3000/companies/${parentValue.id}/users`)
-          .then(res => res.json());
+        return UserModel.findOne({id: mongoose.Schema.ObjectId(parentValue.id)});
       }
     }
   })

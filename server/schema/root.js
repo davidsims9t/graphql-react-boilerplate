@@ -1,8 +1,10 @@
 const graphql = require('graphql');
+const mongoose = require('mongoose');
 const { GraphQLObjectType, GraphQLString } = graphql;
-const fetch = require('node-fetch');
-const UserType = require('./user');
-const CompanyType = require('./company');
+const UserType = require('./User');
+const CompanyType = require('./Company');
+const UserModel = require('../models/User');
+const CompanyModel = require('../models/Company');
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -15,7 +17,7 @@ const RootQuery = new GraphQLObjectType({
         }
       },
       resolve(parentValue, args) {
-        return fetch(`http://localhost:3000/users/${args.id}`).then(res => res.json());
+        return UserModel.findById(args.id);
       }
     },
     company: {
@@ -26,7 +28,7 @@ const RootQuery = new GraphQLObjectType({
         }
       },
       resolve(parentValue, args) {
-        return fetch(`http://localhost:3000/companies/${args.id}`).then(res => res.json());
+        return CompanyModel.findById(args.id);
       }
     }
   }

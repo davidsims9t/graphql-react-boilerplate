@@ -1,5 +1,5 @@
 const graphql = require('graphql');
-const RootQuery = require('./root');
+const RootQuery = require('./Root');
 const Mutation = require('../mutations');
 const { GraphQLSchema } = graphql;
 

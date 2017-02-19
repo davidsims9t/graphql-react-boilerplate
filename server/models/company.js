@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CompanySchema = new Schema({
+  id: Schema.ObjectId,
   name: String
 });
 
-mongoose.model('user', CompanySchema);
+module.exports = mongoose.model('Company', CompanySchema);

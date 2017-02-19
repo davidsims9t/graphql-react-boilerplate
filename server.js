@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const schema = require('./server/schema');
 const app = express();
+mongoose.Promise = Promise;
 
 // Client dependencies
 const webpackMiddleware = require('webpack-dev-middleware');

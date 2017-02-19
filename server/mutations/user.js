@@ -1,12 +1,13 @@
 const graphql = require('graphql');
-const fetch = require('node-fetch');
+const mongoose = require('mongoose');
 const {
   GraphQLObjectType,
   GraphQLNonNull,
   GraphQLString,
   GraphQLInt
 } = graphql;
-const UserType = require('../schema/user');
+const UserType = require('../schema/User');
+const UserModel = require('../models/User');
 
 const mutations = {
   addUser: {
@@ -23,13 +24,11 @@ const mutations = {
       }
     },
     resolve(parentValue, { fullName, age, companyId }) {
-      return fetch('http://localhost:3000/users', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({fullName, age, companyId})
-      }).then(res => res.json());
+      return UserModel.create({
+        fullName,
+        age,
+        companyId
+      });
     }
   },
   editUser: {
@@ -49,13 +48,7 @@ const mutations = {
       }
     },
     resolve(parentValue, { id, fullName, age, companyId }) {
-      return fetch(`http://localhost:3000/users/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ fullName, age })
-      }).then(res => res.json());
+      return UserModel.findByIdAndUpdate(id, {fullName, age});
     }
   },
   deleteUser: {
@@ -66,9 +59,7 @@ const mutations = {
       }
     },
     resolve(parentValue, { id }) {
-      return fetch(`http://localhost:3000/users/${id}`, {
-        method: 'DELETE'
-      }).then(res => res.json());
+      return UserModel.findByIdAndRemove(id);
     }
   }
 };
