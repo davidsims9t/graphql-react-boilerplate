@@ -61,7 +61,7 @@ class AddUser extends Component {
           <Button type="submit">Add User</Button>
         </Form>
 
-        <Link to="/users">Go Back</Link>
+        <Link to="/users" className="user-back-btn btn btn-primary">Go Back</Link>
       </section>
     )
   }
