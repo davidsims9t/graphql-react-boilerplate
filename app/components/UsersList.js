@@ -17,7 +17,8 @@ class UsersList extends Component {
           {this.props.data.users.map(user => {
             return <ListGroupItem key={user._id}>
               Name: {user.fullName}<br />
-              Age: {user.age}
+              Age: {user.age}<br />
+              Company: {user.company.name}
             </ListGroupItem>
           })}
         </ListGroup>

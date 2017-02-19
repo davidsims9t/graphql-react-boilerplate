@@ -4,8 +4,9 @@
   "description": "An example project with GraphQL, Relay, and React.",
   "main": "index.js",
   "scripts": {
-    "start": "",
+    "start": "http-server dist",
     "dev": "nodemon server.js",
+    "build": "webpack -p --config webpack.production.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Sims",
