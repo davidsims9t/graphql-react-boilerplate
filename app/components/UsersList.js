@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo';
 import { PageHeader, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-import '../styles/users-list.css';
+// import '../styles/users-list.css';
 
 import query from '../queries/users';
 
@@ -24,6 +24,10 @@ class UsersList extends Component {
   render() {
     if (this.props.data.loading) {
       return <div>Loading...</div>
+    }
+
+    if (this.props.data.error) {
+      return <div>Something went wrong...</div>
     }
 
     return (
