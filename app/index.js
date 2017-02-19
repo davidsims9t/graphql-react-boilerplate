@@ -6,6 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 
 import Wrapper from './components/Wrapper';
 import UsersList from './components/UsersList';
+import UserItem from './components/UserItem';
 import AddUser from './components/AddUser';
 
 const client = new ApolloClient({});
@@ -17,6 +18,7 @@ const Root = () => {
         <Route path="/users" component={Wrapper}>
           <IndexRoute component={UsersList} />
           <Route path="add" component={AddUser} />
+          <Route path=":id" component={UserItem} />
         </Route>
       </Router>
     </ApolloProvider>

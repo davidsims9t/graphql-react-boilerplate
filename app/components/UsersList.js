@@ -33,7 +33,9 @@ class UsersList extends Component {
         <ListGroup className="users-list">
           {this.props.data.users.map(user => {
             return <ListGroupItem className="users-list-item" key={user.id}>
-              <div className="users-list-item-row">Name: {user.fullName}</div>
+              <div className="users-list-item-row">
+                Name: <Link to={`/users/${user.id}`}>{user.fullName}</Link>
+              </div>
               <div className="users-list-item-row">Age: {user.age}</div>
               <div className="users-list-item-row justified-inline">
                 Company: {user.company.name}
