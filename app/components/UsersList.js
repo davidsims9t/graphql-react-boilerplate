@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
+import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import { PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { PageHeader, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import query from '../queries/users';
 
 class UsersList extends Component {
+  onClick(id) {
+    this.props.mutate({
+      variables: {
+        id
+      }
+    }).then(() => {
+      this.props.data.refetch();
+    }).catch(err => {
+      // error...
+    });
+  }
+
   render() {
     if (this.props.data.loading) {
       return <div>Loading...</div>
@@ -21,6 +34,8 @@ class UsersList extends Component {
               Name: {user.fullName}<br />
               Age: {user.age}<br />
               Company: {user.company.name}
+
+              <Button onClick={() => this.onClick(user.id)}>Delete</Button>
             </ListGroupItem>
           })}
         </ListGroup>
@@ -31,4 +46,14 @@ class UsersList extends Component {
   }
 }
 
-export default graphql(query)(UsersList);
+const mutation = gql`
+  mutation DeleteUser($id: String!) {
+    deleteUser(id: $id) {
+      id
+    }
+  }
+`;
+
+export default graphql(mutation)(
+  graphql(query)(UsersList)
+);
