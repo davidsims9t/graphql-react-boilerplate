@@ -15,11 +15,6 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     users: {
       type: new GraphQLList(UserType),
-      args: {
-        id: {
-          type: GraphQLString
-        }
-      },
       resolve(parentValue, args) {
         return UserModel.find();
       }
@@ -33,6 +28,12 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parentValue, args) {
         return UserModel.findById(args.id);
+      }
+    },
+    companies: {
+      type: new GraphQLList(CompanyType),
+      resolve(parentValue, args) {
+        return CompanyModel.find();
       }
     },
     company: {

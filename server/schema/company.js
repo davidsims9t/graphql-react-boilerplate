@@ -11,7 +11,10 @@ const CompanyType = new GraphQLObjectType({
   name: 'Company',
   fields: () => ({
     id: {
-      type: GraphQLString
+      type: GraphQLString,
+      resolve(root, args) {
+        return root._id;
+      }
     },
     name: {
       type: GraphQLString
@@ -19,7 +22,7 @@ const CompanyType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(require('./User')),
       resolve(parentValue, args) {
-        return UserModel.findOne({id: mongoose.Schema.ObjectId(parentValue.id)});
+        return UserModel.find({companyId: mongoose.Schema.ObjectId(parentValue._id)});
       }
     }
   })

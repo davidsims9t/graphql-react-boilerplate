@@ -1,16 +1,17 @@
 const graphql = require('graphql');
-const fetch = require('node-fetch');
 const { GraphQLObjectType } = graphql;
-const UserType = require('../schema/User');
-const userMutations = require('./User');
-const { addUser, editUser, deleteUser } = userMutations;
+const { addUser, editUser, deleteUser } = require('./User');
+const { addCompany, editCompany, deleteCompany } = require('./Company');
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     addUser,
     editUser,
-    deleteUser
+    deleteUser,
+    addCompany,
+    editCompany,
+    deleteCompany
   }
 });
 
