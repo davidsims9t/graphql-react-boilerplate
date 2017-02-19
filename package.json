@@ -26,7 +26,6 @@
     "react-apollo": "^0.11.1",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
-    "react-preloader-icon": "0.0.9",
     "react-router": "^3.0.2"
   },
   "devDependencies": {
@@ -34,9 +33,11 @@
     "babel-loader": "^6.3.2",
     "babel-preset-env": "^1.1.8",
     "babel-preset-react": "^6.23.0",
+    "css-loader": "^0.26.1",
     "graphiql": "^0.9.3",
     "html-webpack-plugin": "^2.28.0",
     "jest": "^18.1.0",
+    "style-loader": "^0.13.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
   }

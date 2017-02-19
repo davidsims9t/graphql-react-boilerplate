@@ -4,6 +4,8 @@ import { graphql } from 'react-apollo';
 import { PageHeader, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
+import '../styles/users-list.css';
+
 import query from '../queries/users';
 
 class UsersList extends Component {
@@ -26,21 +28,22 @@ class UsersList extends Component {
 
     return (
       <section className="users">
-        <PageHeader>Users List</PageHeader>
+        <PageHeader className="users-heading">Users List</PageHeader>
 
-        <ListGroup>
+        <ListGroup className="users-list">
           {this.props.data.users.map(user => {
-            return <ListGroupItem key={user.id}>
-              Name: {user.fullName}<br />
-              Age: {user.age}<br />
-              Company: {user.company.name}
-
-              <Button onClick={() => this.onClick(user.id)}>Delete</Button>
+            return <ListGroupItem className="users-list-item" key={user.id}>
+              <div className="users-list-item-row">Name: {user.fullName}</div>
+              <div className="users-list-item-row">Age: {user.age}</div>
+              <div className="users-list-item-row justified-inline">
+                Company: {user.company.name}
+                <Button className="user-delete-btn" onClick={() => this.onClick(user.id)}>Delete</Button>
+              </div>
             </ListGroupItem>
           })}
         </ListGroup>
 
-        <Link to="/users/add">Add User</Link>
+        <Link to="/users/add" className="user-add-btn btn btn-primary">Add User</Link>
       </section>
     );
   }
