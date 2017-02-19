@@ -4,13 +4,16 @@ import { graphql } from 'react-apollo';
 
 class UsersList extends Component {
   render() {
-    // loaded as this.props.data.users
-    
+    if (this.props.data.loading) {
+      return <div>Loading...</div>
+    }
+
     return (
       <section>
         <h2>Users List</h2>
 
         <ul>
+          {this.props.data.users.map(user => <li>{user.fullName}</li>)}
         </ul>
       </section>
     );
@@ -20,7 +23,7 @@ class UsersList extends Component {
 const query = gql`
   {
     users {
-      username
+      fullName
     }
   }
 `;
