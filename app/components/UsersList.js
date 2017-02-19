@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Link } from 'react-router';
+
+import query from '../queries/users';
 
 class UsersList extends Component {
   render() {
@@ -15,29 +17,18 @@ class UsersList extends Component {
 
         <ListGroup>
           {this.props.data.users.map(user => {
-            return <ListGroupItem key={user._id}>
+            return <ListGroupItem key={user.id}>
               Name: {user.fullName}<br />
               Age: {user.age}<br />
               Company: {user.company.name}
             </ListGroupItem>
           })}
         </ListGroup>
+
+        <Link to="/users/add">Add User</Link>
       </section>
     );
   }
 }
-
-const query = gql`
-  {
-    users {
-      id
-      fullName
-      age
-      company {
-        name
-      }
-    }
-  }
-`;
 
 export default graphql(query)(UsersList);
