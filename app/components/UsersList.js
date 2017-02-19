@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import { PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class UsersList extends Component {
   render() {
@@ -9,12 +10,12 @@ class UsersList extends Component {
     }
 
     return (
-      <section>
-        <h2>Users List</h2>
+      <section className="users">
+        <PageHeader>Users List</PageHeader>
 
-        <ul>
-          {this.props.data.users.map(user => <li>{user.fullName}</li>)}
-        </ul>
+        <ListGroup>
+          {this.props.data.users.map(user => <ListGroupItem>{user.fullName}</ListGroupItem>)}
+        </ListGroup>
       </section>
     );
   }
@@ -24,6 +25,7 @@ const query = gql`
   {
     users {
       fullName
+      age
     }
   }
 `;
