@@ -1,14 +1,15 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, 'app/index.js')
+    app: path.join(__dirname, 'app/index.js'),
+    'graphql-tag': 'graphql-tag',
+    'apollo-client': 'apollo-client',
+    'react-apollo': 'react-apollo'
   },
   output: {
-    chunkFilename: 'app',
     path: path.join(__dirname, 'dist'),
     filename: '[name].[chunkhash].js'
   },
@@ -17,7 +18,6 @@ module.exports = {
     'react-dom': 'ReactDOM',
     'react-router': 'ReactRouter',
     'lodash': 'lodash',
-    // 'graphql': 'graphql',
     // 'graphql-tag': 'graphql-tag',
     // 'apollo-client': 'ApolloClient',
     // 'react-apollo': 'ApolloProvider',
@@ -55,10 +55,10 @@ module.exports = {
     ]
   },
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   filename: 'vendor-[hash].min.js',
-    // }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['react-apollo', 'apollo-client', 'graphql-tag'],
+      // filename: 'vendor-[hash].min.js',
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'app/views/template.ejs')
     }),

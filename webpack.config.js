@@ -1,13 +1,29 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Dashboard = require('');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const path = require('path');
 
 module.exports = {
   devtool: 'eval',
-  entry: './app/index.js',
+  entry: {
+    app: './app/index.js',
+    'graphql-tag': 'graphql-tag',
+    'apollo-client': 'apollo-client',
+    'react-apollo': 'react-apollo'
+  },
   output: {
-    path: '/',
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].[chunkhash].js'
+  },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+    'react-router': 'ReactRouter',
+    'lodash': 'lodash',
+    // 'graphql-tag': 'graphql-tag',
+    // 'apollo-client': 'ApolloClient',
+    // 'react-apollo': 'ApolloProvider',
+    'react-bootstrap': 'ReactBootstrap'
   },
   module: {
     rules: [
@@ -29,11 +45,8 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function(module) {
-         // this assumes your vendor imports exist in the node_modules directory
-         return module.context && module.context.indexOf('node_modules') !== -1;
-      }
+      name: ['react-apollo', 'apollo-client', 'graphql-tag'],
+      // filename: 'vendor-[hash].min.js',
     }),
     new HtmlWebpackPlugin({
       template: 'app/views/template.ejs'

@@ -4,7 +4,7 @@
   "description": "An example project with GraphQL, Relay, and React.",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -c-1 dist -p 9000",
+    "start": "http-server -c-1 dist",
     "dev": "nodemon server.js",
     "build": "rm -rf dist && webpack -p --config webpack.production.js",
     "test": "jest",
@@ -41,6 +41,7 @@
     "react-test-renderer": "^15.4.2",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.1",
+    "webpack-dashboard": "^0.3.0",
     "webpack-dev-server": "^2.3.0",
     "webpack-node-externals": "^1.5.4"
   }
