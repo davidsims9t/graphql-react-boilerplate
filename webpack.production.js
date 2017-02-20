@@ -1,24 +1,86 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  entry: './app/index.js',
+  entry: {
+    app: path.join(__dirname, 'app/index.js')
+  },
   output: {
-    path: '/',
-    filename: 'bundle.js'
+    chunkFilename: 'app',
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].[chunkhash].js'
+  },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+    'react-router': 'ReactRouter',
+    'lodash': 'lodash',
+    // 'graphql': 'graphql',
+    // 'graphql-tag': 'graphql-tag',
+    // 'apollo-client': 'ApolloClient',
+    // 'react-apollo': 'ApolloProvider',
+    'react-bootstrap': 'ReactBootstrap'
   },
   module: {
     rules: [
       {
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'stage-0', 'react']
+          }
+        },
         test: /\.js$/,
         exclude: /node_modules/
+      },
+      {
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              minimize: true
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }
+        ],
+        test: /\.css$/
       }
     ]
   },
   plugins: [
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   filename: 'vendor-[hash].min.js',
+    // }),
     new HtmlWebpackPlugin({
-      template: 'app/views/index.html'
+      template: path.join(__dirname, 'app/views/template.ejs')
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true
+      },
+      comments: false
     })
   ]
 };

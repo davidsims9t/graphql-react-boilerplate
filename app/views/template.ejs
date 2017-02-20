@@ -10,11 +10,14 @@
       <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
     <% } %>
 
+    <!-- CSS dependencies -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
-  
+
     <link rel="canonical" href="http://localhost/" />
+
+    <!-- Favicons -->
     <link rel="shortcut icon" href="/assets/favicon.png" />
     <link rel="apple-touch-icon-precomposed" sizes="60x60" href="" />
     <link rel="apple-touch-icon-precomposed" sizes="76x76" href="" />
@@ -25,5 +28,13 @@
   </head>
   <body>
     <div id="mount"></div>
+    <script src="https://unpkg.com/react@15.4.2/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
+    <script src="https://unpkg.com/react-router/umd/ReactRouter.min.js"></script>
+    <!-- <script src="https://unpkg.com/graphql@0.9.1/graphql.js"></script> -->
+    <!-- <script src="https://unpkg.com/graphql-tag@1.2.4"></script> -->
+    <!-- <script src="https://unpkg.com/apollo-client@0.8.7/apollo.umd.js"></script> -->
+    <!-- <script src="https://unpkg.com/react-apollo@0.11.1/lib/browser.js"></script> -->
+    <script src="https://unpkg.com/react-bootstrap@0.30.7/dist/react-bootstrap.min.js"></script>
   </body>
 </html>

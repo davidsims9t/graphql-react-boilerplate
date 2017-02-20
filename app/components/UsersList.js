@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo';
 import { PageHeader, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-// import '../styles/users-list.css';
+import '../styles/users-list.css';
 
 import query from '../queries/users';
 
