@@ -56,8 +56,7 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['react-apollo', 'apollo-client', 'graphql-tag'],
-      // filename: 'vendor-[hash].min.js',
+      name: ['react-apollo', 'apollo-client', 'graphql-tag']
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'app/views/template.ejs')
