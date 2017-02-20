@@ -12,7 +12,11 @@ import UserItem from './components/UserItem';
 import AddUser from './components/AddUser';
 import Home from './components/Home';
 
-const client = new ApolloClient({});
+// Apollo client with instructions to identify records by the id attribute.
+// Every record should have an id attribute.
+const client = new ApolloClient({
+  dataIdFromObject: o => o.id
+});
 
 const Root = () => {
   return (
