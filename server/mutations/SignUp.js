@@ -3,21 +3,26 @@ const fetch = require('node-fetch');
 const {
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLString,
-  GraphQLInt
+  GraphQLString
 } = graphql;
 const UserType = require('../schema/User');
 
 const mutations = {
   signUp: {
-    type: CompanyType,
+    type: UserType,
     args: {
-      name: {
+      username: {
+        type: GraphQLString
+      },
+      email: {
+        type: GraphQLString
+      },
+      password: {
         type: GraphQLString
       }
     },
     resolve(parentValue, { username, email, password }, request) {
-      return fetch(`${AUTH0_CLIENT_URL}/dbconnections/signup`, {
+      return fetch(`${process.env.AUTH0_CLIENT_URL}/dbconnections/signup`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"

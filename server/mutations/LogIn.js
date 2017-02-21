@@ -3,13 +3,12 @@ const fetch = require('node-fetch');
 const {
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLString,
-  GraphQLInt
+  GraphQLString
 } = graphql;
 const UserType = require('../schema/User');
 
 const mutations = {
-  signUp: {
+  logIn: {
     type: UserType,
     args: {
       email: {

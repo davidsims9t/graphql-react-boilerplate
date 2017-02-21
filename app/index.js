@@ -25,7 +25,7 @@ networkInterface.use([{
       req.options.headers = {};
     }
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('id_token');
     req.options.headers.authorization = token ? `Bearer ${token}` : null;
     next();
   }
