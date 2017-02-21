@@ -1,4 +1,5 @@
 const graphql = require('graphql');
+const fetch = require('node-fetch');
 const {
   GraphQLObjectType,
   GraphQLNonNull,
@@ -9,14 +10,29 @@ const UserType = require('../schema/User');
 
 const mutations = {
   signUp: {
-    type: CompanyType,
+    type: UserType,
     args: {
-      name: {
+      email: {
+        type: GraphQLString
+      },
+      password: {
         type: GraphQLString
       }
     },
-    resolve(parentValue, args, request) {
-      // Auth0 authentication
+    resolve(parentValue, { username, password }, request) {
+      return fetch(`${process.env.AUTH0_CLIENT_URL}/oauth/ro`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "client_id": process.env.AUTH0_CLIENT_ID,
+          "username": username,
+          "password": password,
+          "connection": "Username-Password-Authentication",
+          "scope": "openid"
+        })
+      }).then(res => res.json());
     }
   }
 };
