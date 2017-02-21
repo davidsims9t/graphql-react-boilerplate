@@ -1,9 +1,11 @@
 // Server dependencies
 const express = require('express');
 const expressGraphQL = require('express-graphql');
+const jwt = require('express-jwt');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const schema = require('./server/schema');
+
 const app = express();
 mongoose.Promise = Promise;
 
@@ -15,6 +17,12 @@ const webpackConfig = require('./webpack.config.js');
 // Global variables
 require('dotenv').load();
 
+// Authentication by using JWTs and Auth0.
+const authenticate = jwt({
+  secret: new Buffer(process.env.AUTH0_CLIENT_SECRET, 'base64'),
+  audience: process.env.AUTH0_CLIENT_ID
+});
+
 // Mongoose connection
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection
@@ -22,7 +30,7 @@ mongoose.connection
   .on('error', error => console.error('Something went wrong: ', error))
 
 // GraphQL endpoint with graphiql
-app.use('/graphql', expressGraphQL({
+app.use('/graphql', authenticate, expressGraphQL({
   schema,
   graphiql: true
 }));
@@ -30,4 +38,5 @@ app.use('/graphql', expressGraphQL({
 // Webpack middleware
 app.use(webpackMiddleware(webpack(webpackConfig)));
 
+// Start the server
 app.listen(process.env.PORT, () => console.log('Running on port ' + process.env.PORT));

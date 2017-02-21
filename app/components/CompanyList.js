@@ -5,6 +5,7 @@ import { PageHeader, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import query from '../queries/companies';
+import mutation from '../mutations/addCompany';
 
 class UsersList extends Component {
   onClick(id) {

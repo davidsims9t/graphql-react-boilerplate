@@ -5,6 +5,7 @@ import { PageHeader, Form, FormGroup, Button, ControlLabel, FormControl } from '
 import { Link, hashHistory } from 'react-router';
 
 import query from '../queries/users';
+import mutation from '../mutations/addUser';
 
 class AddUser extends Component {
   constructor(props) {
@@ -16,15 +17,15 @@ class AddUser extends Component {
     };
   }
 
-  onChangeFullName(event) {
+  onChangeFullName = event => {
     this.setState({fullName: event.target.value});
   }
 
-  onChangeAge(event) {
+  onChangeAge = event => {
     this.setState({age: event.target.value});
   }
 
-  onSubmit(event) {
+  onSubmit = event => {
     event.preventDefault();
 
     this.props.mutate({
@@ -32,6 +33,11 @@ class AddUser extends Component {
         fullName: this.state.fullName,
         age: +this.state.age
       },
+      // optimisticResponse: {
+      //   __typename: 'Mutation',
+      //   fullName: this.state.fullName,
+      //   age: +this.state.age
+      // },
       refetchQueries: [{ query }]
     }).then(() => {
       hashHistory.push('/users');
@@ -66,14 +72,5 @@ class AddUser extends Component {
     )
   }
 }
-
-const mutation = gql`
-  mutation AddUser($fullName: String!, $age: Int) {
-    addUser(fullName: $fullName, age: $age) {
-      fullName
-      age
-    }
-  }
-`;
 
 export default graphql(mutation)(AddUser);
