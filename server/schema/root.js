@@ -15,7 +15,11 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     users: {
       type: new GraphQLList(UserType),
-      resolve(parentValue, args) {
+      resolve(parentValue, args, req) {
+        if (!req.user) {
+          throw new Error('Authentication required.');
+        }
+
         return UserModel.find();
       }
     },
@@ -33,6 +37,10 @@ const RootQuery = new GraphQLObjectType({
     companies: {
       type: new GraphQLList(CompanyType),
       resolve(parentValue, args) {
+        if (!req.user) {
+          throw new Error('Authentication required.');
+        }
+        
         return CompanyModel.find();
       }
     },

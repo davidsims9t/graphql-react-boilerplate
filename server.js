@@ -18,10 +18,12 @@ const webpackConfig = require('./webpack.config.js');
 require('dotenv').load();
 
 // Authentication by using JWTs and Auth0.
-const authenticate = jwt({
+const auth = jwt({
   secret: new Buffer(process.env.AUTH0_CLIENT_SECRET, 'base64'),
-  audience: process.env.AUTH0_CLIENT_ID
+  audience: process.env.AUTH0_CLIENT_ID,
+  credentialsRequired: false
 });
+app.use(auth);
 
 // Mongoose connection
 mongoose.connect(process.env.MONGO_URI);
@@ -30,7 +32,7 @@ mongoose.connection
   .on('error', error => console.error('Something went wrong: ', error))
 
 // GraphQL endpoint with graphiql
-app.use('/graphql', authenticate, expressGraphQL({
+app.use('/graphql', expressGraphQL({
   schema,
   graphiql: true
 }));
