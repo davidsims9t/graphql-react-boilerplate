@@ -5,6 +5,7 @@ import { PageHeader, Form, FormGroup, Button, ControlLabel, FormControl } from '
 import { Link, hashHistory } from 'react-router';
 
 import query from '../queries/users';
+import mutation from '../mutations/addCompany';
 
 class AddCompany extends Component {
   constructor(props) {
@@ -57,14 +58,5 @@ class AddCompany extends Component {
     )
   }
 }
-
-const mutation = gql`
-  mutation AddCompany() {
-    addCompnay() {
-      fullName
-      age
-    }
-  }
-`;
 
 export default graphql(mutation)(AddCompany);

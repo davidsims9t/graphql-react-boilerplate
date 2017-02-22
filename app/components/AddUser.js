@@ -53,15 +53,15 @@ class AddUser extends Component {
           Add User
         </PageHeader>
 
-        <Form onSubmit={this.onSubmit.bind(this)}>
+        <Form onSubmit={this.onSubmit}>
           <FormGroup controlId="formInlineName">
             <ControlLabel>Full Name</ControlLabel>
-            <FormControl type="text" onChange={this.onChangeFullName.bind(this)} value={this.state.fullName} />
+            <FormControl type="text" onChange={this.onChangeFullName} value={this.state.fullName} />
           </FormGroup>
 
           <FormGroup controlId="formInlineName">
             <ControlLabel>Full Name</ControlLabel>
-            <FormControl type="text" onChange={this.onChangeAge.bind(this)} value={this.state.age} />
+            <FormControl type="text" onChange={this.onChangeAge} value={this.state.age} />
           </FormGroup>
 
           <Button type="submit">Add User</Button>

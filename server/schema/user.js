@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const {
   GraphQLObjectType,
   GraphQLString,
+  GraphQLID,
   GraphQLInt
 } = graphql;
 
@@ -12,9 +13,9 @@ const UserType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
     id: {
-      type: GraphQLString,
-      resolve(root, args) {
-        return root._id;
+      type: GraphQLID,
+      resolve(parentValue, args) {
+        return parentValue._id;
       }
     },
     fullName: {

@@ -2,6 +2,7 @@ const graphql = require('graphql');
 const {
   GraphQLObjectType,
   GraphQLString,
+  GraphQLID,
   GraphQLList
 } = graphql;
 
@@ -11,9 +12,9 @@ const CompanyType = new GraphQLObjectType({
   name: 'Company',
   fields: () => ({
     id: {
-      type: GraphQLString,
-      resolve(root, args) {
-        return root._id;
+      type: GraphQLID,
+      resolve(parentValue, args) {
+        return parentValue._id;
       }
     },
     name: {

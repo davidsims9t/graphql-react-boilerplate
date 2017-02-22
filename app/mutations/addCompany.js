@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
   mutation AddCompany() {
-    addCompnay() {
+    addCompany() {
       fullName
       age
     }

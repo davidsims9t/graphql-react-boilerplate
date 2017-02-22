@@ -4,8 +4,10 @@ const {
   GraphQLObjectType,
   GraphQLNonNull,
   GraphQLString,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLID
 } = graphql;
+
 const CompanyType = require('../schema/Company');
 const CompanyModel = require('../models/Company');
 
@@ -27,7 +29,7 @@ const mutations = {
     type: CompanyType,
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLString)
+        type: new GraphQLNonNull(GraphQLID)
       },
       name: {
         type: GraphQLString
@@ -41,7 +43,7 @@ const mutations = {
     type: CompanyType,
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLString)
+        type: new GraphQLNonNull(GraphQLID)
       }
     },
     resolve(parentValue, { id }) {

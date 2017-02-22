@@ -2,14 +2,21 @@ const graphql = require('graphql');
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLBoolean
+  GraphQLBoolean,
+  GraphQLID
 } = graphql;
 
 const SignUpType = new GraphQLObjectType({
   name: 'SignUp',
   fields: () => ({
+    id: {
+      type: GraphQLID,
+      resolve(parentValue) {
+        return parentValue._id;
+      }
+    },
     _id: {
-      type: GraphQLString
+      type: GraphQLID
     },
     email_verified: {
       type: GraphQLBoolean

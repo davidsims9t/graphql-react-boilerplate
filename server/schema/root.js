@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLList
+  GraphQLList,
+  GraphQLID
 } = graphql;
 const UserType = require('./User');
 const CompanyType = require('./Company');
@@ -27,7 +28,7 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: {
         id: {
-          type: GraphQLString
+          type: GraphQLID
         }
       },
       resolve(parentValue, args) {
@@ -36,11 +37,11 @@ const RootQuery = new GraphQLObjectType({
     },
     companies: {
       type: new GraphQLList(CompanyType),
-      resolve(parentValue, args) {
+      resolve(parentValue, args, req) {
         if (!req.user) {
           throw new Error('Authentication required.');
         }
-        
+
         return CompanyModel.find();
       }
     },
@@ -48,7 +49,7 @@ const RootQuery = new GraphQLObjectType({
       type: CompanyType,
       args: {
         id: {
-          type: GraphQLString
+          type: GraphQLID
         }
       },
       resolve(parentValue, args) {

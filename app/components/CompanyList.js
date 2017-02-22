@@ -55,7 +55,7 @@ class UsersList extends Component {
 }
 
 const mutation = gql`
-  mutation DeleteUser($id: String!) {
+  mutation DeleteUser($id: ID!) {
     deleteUser(id: $id) {
       id
     }

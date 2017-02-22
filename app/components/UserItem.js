@@ -25,7 +25,7 @@ class UserItem extends Component {
 }
 
 const query = gql`
-query User($id: String!) {
+query User($id: ID!) {
   user(id: $id) {
     id
     fullName

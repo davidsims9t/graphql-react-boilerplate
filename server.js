@@ -17,7 +17,7 @@ const webpackConfig = require('./webpack.config.js');
 // Global variables
 require('dotenv').load();
 
-// Authentication by using JWTs and Auth0.
+// Authentication middleware for making authenticated requests with JWTs and Auth0.
 const auth = jwt({
   secret: new Buffer(process.env.AUTH0_CLIENT_SECRET, 'base64'),
   audience: process.env.AUTH0_CLIENT_ID,
