@@ -4,9 +4,10 @@ const faker = require('faker');
 require('dotenv').load();
 
 test('should sign up the user', () => {
-  const email = faker.internet.email().toLowerCase();
+  // const email = faker.internet.email().toLowerCase();
+  const email = 'test';
 
-  SignUp.signUp.resolve({}, {
+  SignUp.resolve({}, {
     username: email,
     email,
     password: faker.random.alphaNumeric()

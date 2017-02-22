@@ -16,13 +16,11 @@ const mutations = {
     type: CompanyType,
     args: {
       name: {
-        type: GraphQLString
+        type: new GraphQLNonNull(GraphQLString)
       }
     },
     resolve(parentValue, { name }) {
-      return CompanyModel.create({
-        name
-      });
+      return CompanyModel.create({ name });
     }
   },
   editCompany: {

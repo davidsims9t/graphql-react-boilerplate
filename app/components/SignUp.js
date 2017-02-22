@@ -13,7 +13,8 @@ class SignUp extends Component {
     this.state = {
       username: '',
       email: '',
-      password: ''
+      password: '',
+      errors: []
     };
   }
 
@@ -28,8 +29,10 @@ class SignUp extends Component {
       }
     }).then(res => {
       localStorage.setItem('id_token', res.data.logIn.id_token);
+      browserHistory.push('/log-in');
     }).catch(err => {
-      console.error('failed to login');
+      const errors = err.graphQLErrors.map(error => error.message);
+      this.setState({ errors });
     });
   }
 

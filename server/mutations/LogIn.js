@@ -11,10 +11,10 @@ module.exports = {
   type: LogInType,
   args: {
     username: {
-      type: GraphQLString
+      type: new GraphQLNonNull(GraphQLString)
     },
     password: {
-      type: GraphQLString
+      type: new GraphQLNonNull(GraphQLString)
     }
   },
   resolve(parentValue, { username, password }, request) {

@@ -1,6 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
+import { browserHistory } from 'react-router';
 import gql from 'graphql-tag';
 import { PageHeader, Form, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 
@@ -12,7 +13,8 @@ class LogIn extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errors: []
     };
   }
 
@@ -26,8 +28,10 @@ class LogIn extends Component {
       }
     }).then(res => {
       localStorage.setItem('id_token', res.data.logIn.id_token);
+      browserHistory.push('/users');
     }).catch(err => {
-      console.error('failed to login');
+      const errors = err.graphQLErrors.map(error => error.message);
+      this.setState({ errors });
     });
   }
 

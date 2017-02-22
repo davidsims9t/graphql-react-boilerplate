@@ -3,7 +3,8 @@ const fetch = require('node-fetch');
 const {
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLString
+  GraphQLString,
+  GraphQLScalarType
 } = graphql;
 const UserType = require('../schema/User');
 
@@ -11,16 +12,16 @@ module.exports = {
   type: UserType,
   args: {
     username: {
-      type: GraphQLString
+      type: new GraphQLNonNull(GraphQLString)
     },
     email: {
-      type: GraphQLString
+      type: new GraphQLNonNull(GraphQLString)
     },
     password: {
-      type: GraphQLString
+      type: new GraphQLNonNull(GraphQLString)
     }
   },
-  resolve(parentValue, { username, email, password }, request) {
+  resolve(parentValue, { username, email, password }) {
     return fetch(`${process.env.AUTH0_CLIENT_URL}/dbconnections/signup`, {
       method: 'POST',
       headers: {

@@ -3,7 +3,7 @@ const LogIn = require('../LogIn');
 require('dotenv').load();
 
 test('should log in the user', () => {
-  LogIn.logIn.resolve({}, {
+  LogIn.resolve({}, {
     username: process.env.TEST_USERNAME,
     password: process.env.TEST_PASSWORD
   }).then(res => {
