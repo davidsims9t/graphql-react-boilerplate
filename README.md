@@ -1,3 +1,19 @@
+  #####  ######     #    ######  #     #  #####  #          ###  #####      
+ #     # #     #   # #   #     # #     # #     # #           #  #     #     
+ #       #     #  #   #  #     # #     # #     # #           #  #           
+ #  #### ######  #     # ######  ####### #     # #           #   #####      
+ #     # #   #   ####### #       #     # #   # # #           #        #     
+ #     # #    #  #     # #       #     # #    #  #           #  #     #     
+  #####  #     # #     # #       #     #  #### # #######    ###  #####      
+
+           #    #     # #######  #####  ####### #     # #######             
+          # #   #  #  # #       #     # #     # ##   ## #                   
+         #   #  #  #  # #       #       #     # # # # # #                   
+        #     # #  #  # #####    #####  #     # #  #  # #####               
+        ####### #  #  # #             # #     # #     # #                   
+        #     # #  #  # #       #     # #     # #     # #                   
+        #     #  ## ##  #######  #####  ####### #     # #######             
+
 # GraphQL, Apollo Client, and React Boilerplate
 
 Uses GraphQL and Express for the back-end, MongoDB for the database, Mongoose as the ODM, Auth0 and JWTs for authentication, Apollo client as the client library, React for the front-end framework, Webpack as the front-end build tool, Bootstrap for the styling, Jest for unit testing, and Flow for static-type checking.
